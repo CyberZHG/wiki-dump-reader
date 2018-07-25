@@ -4,8 +4,7 @@ import re
 class Cleaner(object):
 
     def __init__(self):
-        self.text = ''
-        self.links = []
+        pass
 
     def _remove_file_links(self, text):
         """Remove links like `[[File:*]]`"""
@@ -66,3 +65,56 @@ class Cleaner(object):
     def _remove_langs(self, text):
         """Remove pattenrs like {{lang-*|*}}}"""
         return re.sub(r'{{lang(-|\|).*?\|(.*?)}}', r'\2', text, flags=re.IGNORECASE)
+
+    def build_links(self, text):
+        begin, removed, links = 0, '', []
+        while begin < len(text):
+            pattern_begin = text.find('[[', begin)
+            if pattern_begin == -1:
+                if begin == 0:
+                    removed = text
+                else:
+                    removed += text[begin:]
+                break
+            if pattern_begin > begin:
+                removed += text[begin:pattern_begin]
+            pattern_end, depth = pattern_begin + 2, 2
+            while pattern_end < len(text):
+                ch = text[pattern_end]
+                pattern_end += 1
+                if ch == '[':
+                    depth += 1
+                elif ch == ']':
+                    depth -= 1
+                    if depth == 0:
+                        link = text[pattern_begin + 2:pattern_end - 2]
+                        parts = link.split('|')
+                        if len(parts) == 1:
+                            if ':' in link:
+                                pure = link.split(':')[-1]
+                                links.append({
+                                    'begin': len(removed),
+                                    'end': len(removed) + len(pure),
+                                    'link': link,
+                                    'text': pure
+                                })
+                                removed += pure
+                            else:
+                                links.append({
+                                    'begin': len(removed),
+                                    'end': len(removed) + len(text),
+                                    'link': link,
+                                    'text': link
+                                })
+                                removed += link
+                        elif len(parts) == 2:
+                            links.append({
+                                'begin': len(removed),
+                                'end': len(removed) + len(parts[1]),
+                                'link': parts[0],
+                                'text': parts[1]
+                            })
+                            removed += parts[1]
+                        break
+            begin = pattern_end
+        return removed, links
