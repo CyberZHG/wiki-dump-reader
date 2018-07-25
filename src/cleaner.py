@@ -6,6 +6,15 @@ class Cleaner(object):
     def __init__(self):
         pass
 
+    def clean_text(self, text):
+        text = self._remove_file_links(text)
+        text = self._remove_image_links(text)
+        text = self._remove_refs(text)
+        text = self._remove_emphasises(text)
+        text = self._remove_comments(text)
+        text = self._remove_langs(text)
+        return text
+
     def _remove_file_links(self, text):
         """Remove links like `[[File:*]]`"""
         return self._remove_resource_links(text, 'File')
