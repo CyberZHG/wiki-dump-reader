@@ -62,3 +62,7 @@ class Cleaner(object):
     def _remove_comments(self, text):
         """Remove patterns like <!--*-->"""
         return re.sub(r'<!--.*?-->', '', text)
+
+    def _remove_langs(self, text):
+        """Remove pattenrs like {{lang-*|*}}}"""
+        return re.sub(r'{{lang(-|\|).*?\|(.*?)}}', r'\2', text, flags=re.IGNORECASE)
