@@ -53,8 +53,12 @@ class Cleaner(object):
         text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE)
         return text
 
-    def _remove_emphasis(self, text):
+    def _remove_emphasises(self, text):
         """Remove patterns like '''*'''"""
         text = re.sub(r"'''(.*?)'''", r'\1', text)
         text = re.sub(r"''(.*?)''", r'\1', text)
         return text
+
+    def _remove_comments(self, text):
+        """Remove patterns like <!--*-->"""
+        return re.sub(r'<!--.*?-->', '', text)
