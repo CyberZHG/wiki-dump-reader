@@ -46,3 +46,9 @@ class Cleaner(object):
         if len(text) > begin:
             removed += text[begin:]
         return removed
+
+    def _remove_refs(self, text):
+        """Remove patterns like <ref*>*</ref>"""
+        text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE)
+        return text
