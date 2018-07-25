@@ -2,7 +2,7 @@ import unittest
 from src import Cleaner
 
 
-class TestRemoveResources(unittest.TestCase):
+class TestRemoveRefs(unittest.TestCase):
 
     def setUp(self):
         self.cleaner = Cleaner()
