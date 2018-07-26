@@ -97,9 +97,13 @@ class Cleaner(object):
 
     def _remove_choices(self, text):
         """Remove patterns like -{zh-hans:*; zh-hant:*}-"""
-        text = re.sub(r'-{.*?zh(-hans|-cn|-hk|):(.*?)(;.*?}-|}-)', r'\2', text, flags=re.DOTALL)
-        text = re.sub(r'-{.*?:(.*?)(;.*?}-|}-)', r'\1', text, flags=re.DOTALL)
-        text = re.sub(r'-{(.*?)}-', r'\1', text, flags=re.DOTALL)
+        text = re.sub(
+            r'-{.{,100}?zh(-hans|-cn|-hk|):(.{,100}?)(;.{,100}?}-|}-)',
+            r'\2', text,
+            flags=re.DOTALL
+        )
+        text = re.sub(r'-{.{,100}?:(.{,100}?)(;.{,100}?}-|}-)', r'\1', text, flags=re.DOTALL)
+        text = re.sub(r'-{(.{,100}?)}-', r'\1', text, flags=re.DOTALL)
         return text
 
     def _remove_templates(self, text):
