@@ -15,6 +15,7 @@ class Cleaner(object):
         text = self._remove_langs(text)
         text = self._remove_titles(text)
         text = self._remove_choices(text)
+        text = self._remove_templates(text)
         text = self._remove_continuous_newlines(text)
         return text
 
@@ -60,23 +61,23 @@ class Cleaner(object):
 
     def _remove_refs(self, text):
         """Remove patterns like <ref*>*</ref>"""
-        text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE)
-        text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE | re.DOTALL)
         return text
 
     def _remove_emphasises(self, text):
         """Remove patterns like '''*'''"""
-        text = re.sub(r"'''(.*?)'''", r'\1', text)
-        text = re.sub(r"''(.*?)''", r'\1', text)
+        text = re.sub(r"'''(.*?)'''", r'\1', text, flags=re.DOTALL)
+        text = re.sub(r"''(.*?)''", r'\1', text, flags=re.DOTALL)
         return text
 
     def _remove_comments(self, text):
         """Remove patterns like <!--*-->"""
-        return re.sub(r'<!--.*?-->', '', text)
+        return re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
 
     def _remove_langs(self, text):
         """Remove pattenrs like {{lang-*|*}}}"""
-        return re.sub(r'{{lang(-|\|).*?\|(.*?)}}', r'\2', text, flags=re.IGNORECASE)
+        return re.sub(r'{{lang(-|\|).*?\|(.*?)}}', r'\2', text, flags=re.IGNORECASE | re.DOTALL)
 
     def _remove_titles(self, text):
         """Remove patterns like ==*=="""
@@ -84,10 +85,45 @@ class Cleaner(object):
 
     def _remove_choices(self, text):
         """Remove patterns like -{zh-hans:*; zh-hant:*}-"""
-        text = re.sub(r'-{.*?zh(-hans|-cn|-hk|):(.*?)(;.*?}-|}-)', r'\2', text)
-        text = re.sub(r'-{.*?:(.*?)(;.*?}-|}-)', r'\1', text)
-        text = re.sub(r'-{(.*?)}-', r'\1', text)
+        text = re.sub(r'-{.*?zh(-hans|-cn|-hk|):(.*?)(;.*?}-|}-)', r'\2', text, flags=re.DOTALL)
+        text = re.sub(r'-{.*?:(.*?)(;.*?}-|}-)', r'\1', text, flags=re.DOTALL)
+        text = re.sub(r'-{(.*?)}-', r'\1', text, flags=re.DOTALL)
         return text
+
+    def _remove_templates(self, text):
+        """Remove patterns like {{*}}"""
+        begin, removed = 0, ''
+        while begin < len(text):
+            pattern_begin = text.find('{{', begin)
+            if pattern_begin == -1:
+                if begin == 0:
+                    removed = text
+                else:
+                    removed += text[begin:]
+                break
+            if pattern_begin > begin:
+                removed += text[begin:pattern_begin]
+            pattern_end, depth = pattern_begin + 2, 2
+            while pattern_end < len(text):
+                ch = text[pattern_end]
+                pattern_end += 1
+                if ch == '{':
+                    depth += 1
+                elif ch == '}':
+                    depth -= 1
+                    if depth == 0:
+                        link = text[pattern_begin + 2:pattern_end - 2]
+                        parts = link.split('|')
+                        template_type = parts[0].split(' ')[0]
+                        if len(parts) == 1:
+                            if all(map(lambda x: x in {'"', "'", ' '}, parts[0][:])):
+                                removed += parts[0].replace(' ', '')
+                        elif len(parts) in [2, 3]:
+                            if template_type not in {'cite', 'webarchive'}:
+                                removed += parts[1]
+                        break
+            begin = pattern_end
+        return removed
 
     def _remove_continuous_newlines(self, text):
         return re.sub(r'\n{2,}', '\n', text)

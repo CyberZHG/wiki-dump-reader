@@ -41,3 +41,17 @@ class TestCleanText(unittest.TestCase):
         actual = self.cleaner.clean_text(text)
         actual, links = self.cleaner.build_links(actual)
         self.assertEqual(expected, actual)
+
+    def test_case_4(self):
+        text = "亚里士多德死后，整个哲学界陷入了独立时期，称为{{link-en|希腊化哲学|Hellenistic_philosophy}}时期。因为整个社会" \
+               "和政治陷入混乱。这段时期产生了[[斯多葛学派]]和[[伊壁鸠鲁学派]]，以及[[皮浪主义|怀疑主义派]]、[[新柏拉图主义|新柏" \
+               "拉图派]]和{{le|新毕达哥拉斯主义|Neopythagoreanism}}。这些学派的共同特点是伦理化。斯多葛学派主要是顺应自然和自制" \
+               "。伊壁鸠鲁学派则是把快乐作为生活的本质和善的标准。而新柏拉图派和新毕达哥拉斯派都是带有[[宗教]]主义的哲学，并逐渐产" \
+               "生融化[[基督教]]和希腊哲学于一体的理论，即为后来的[[基督教哲学]]。"
+        expected = "亚里士多德死后，整个哲学界陷入了独立时期，称为希腊化哲学时期。因为整个社会和政治陷入混乱。这段时期产生了斯多葛学" \
+                   "派和伊壁鸠鲁学派，以及怀疑主义派、新柏拉图派和新毕达哥拉斯主义。这些学派的共同特点是伦理化。斯多葛学派主要是顺应" \
+                   "自然和自制。伊壁鸠鲁学派则是把快乐作为生活的本质和善的标准。而新柏拉图派和新毕达哥拉斯派都是带有宗教主义的哲学，" \
+                   "并逐渐产生融化基督教和希腊哲学于一体的理论，即为后来的基督教哲学。"
+        actual = self.cleaner.clean_text(text)
+        actual, links = self.cleaner.build_links(actual)
+        self.assertEqual(expected, actual)

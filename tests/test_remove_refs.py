@@ -38,3 +38,14 @@ class TestRemoveRefs(unittest.TestCase):
                    '等的著作'
         actual = self.cleaner._remove_refs(text)
         self.assertEqual(expected, actual)
+
+    def test_remove_ref_multiline(self):
+        text = '[[史前史|史前]]的人類就已嘗試用自然的法則來衡量物質的多少、時間的長短等抽象的數量關係，比如[[时间单位]]有[[日]]、' \
+               '[[季節]]和[[年]]等。[[算术|算術]]（[[加法|加]][[減法|減]][[乘法|乘]][[除法|除]]）也自然而然地產生了。古代的石' \
+               '碑及泥版亦證實了當時已有[[几何学|幾何]]的知識<ref>{{Cite web \n |url= http://web.ptes.tp.edu.tw/big6/civ' \
+               'il/babylonian-03.htm\n |title= 數學\n |accessdate=2013-10-06\n |publisher= 台北市立北投國小\n}}</ref>。'
+        expected = '[[史前史|史前]]的人類就已嘗試用自然的法則來衡量物質的多少、時間的長短等抽象的數量關係，比如[[时间单位]]有[[日' \
+                   ']]、[[季節]]和[[年]]等。[[算术|算術]]（[[加法|加]][[減法|減]][[乘法|乘]][[除法|除]]）也自然而然地產生了。' \
+                   '古代的石碑及泥版亦證實了當時已有[[几何学|幾何]]的知識。'
+        actual = self.cleaner._remove_refs(text)
+        self.assertEqual(expected, actual)
