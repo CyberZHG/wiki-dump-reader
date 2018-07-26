@@ -19,6 +19,7 @@ class Cleaner(object):
         text = self._remove_templates(text)
         text = self._remove_htmls(text)
         text = self._remove_lists(text)
+        text = self._remove_indents(text)
         text = self._remove_styles(text)
         text = self._remove_continuous_newlines(text)
         return text.strip()
@@ -73,7 +74,7 @@ class Cleaner(object):
         """Remove patterns like <ref*>*</ref>"""
         text = re.sub(r'<ref[^/]*?/>', '', text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE | re.DOTALL)
-        text = re.sub(r'{{Refbegin.*?Refend}}', '', text, flags=re.IGNORECASE | re.DOTALL)
+        # text = re.sub(r'{{Refbegin.*?Refend}}', '', text, flags=re.IGNORECASE | re.DOTALL)
         return text
 
     def _remove_emphasises(self, text):
@@ -142,6 +143,9 @@ class Cleaner(object):
     def _remove_lists(self, text):
         return re.sub(r'^\s*[\*#]\s*', '', text, flags=re.MULTILINE)
 
+    def _remove_indents(self, text):
+        return re.sub(r'^\s*[:;]\s*', '', text, flags=re.MULTILINE)
+
     def _remove_styles(self, text):
         return re.sub(r':?{\| style=.*?\|}', '', text, flags=re.IGNORECASE | re.DOTALL)
 
@@ -199,4 +203,4 @@ class Cleaner(object):
                             removed += parts[1]
                         break
             begin = pattern_end
-        return removed, links
+        return removed.strip(), links

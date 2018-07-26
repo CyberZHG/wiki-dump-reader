@@ -13,4 +13,4 @@ before_script:
 script:
   - bash test.sh
 after_success:
-  coveralls --base_dir src
+  coveralls

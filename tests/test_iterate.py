@@ -26,15 +26,24 @@ class TestIterate(unittest.TestCase):
         with codecs.open(path, 'w', 'utf8') as writer:
             writer.write(text)
 
-    def test_clean_mathematics(self):
-        found = False
-        for title, text in iterate(self.sample_file_path):
-            if title == '数学':
-                found = True
-                text = self.cleaner.clean_text(text)
-                actual, _ = self.cleaner.build_links(text)
-                expected = self.read_target('mathematics')
-                if actual != expected:
-                    self.save_temp('mathematics', actual)
-                self.assertEqual(expected, actual)
-        self.assertTrue(found)
+    def test_clean(self):
+        targets = {
+            '数学': 'Mathematics',
+            '哲学': 'Philosophy',
+            '文學': 'Literature',
+        }
+        for target_title, target in targets.items():
+            found = False
+            for title, text in iterate(self.sample_file_path):
+                if title == target_title:
+                    found = True
+                    text = self.cleaner.clean_text(text)
+                    actual, _ = self.cleaner.build_links(text)
+                    expected = self.read_target(target)
+                    if actual != expected:
+                        self.save_temp(target, actual)
+                    self.assertEqual(expected, actual, target)
+                else:
+                    text = self.cleaner.clean_text(text)
+                    self.cleaner.build_links(text)
+            self.assertTrue(found)
