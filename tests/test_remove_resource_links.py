@@ -29,7 +29,6 @@ class TestRemoveResources(unittest.TestCase):
         expected = '[File:Emile Durkheim.jpg|thumb|180px|[[爱米尔·涂尔干]]]'
         actual = self.cleaner._remove_file_links(text)
         self.assertEqual(expected, actual)
-        self.assertEqual(id(actual), id(text))
 
     def test_remove_image_link_normal(self):
         text = '[[Image:Transistorer (croped).jpg|thumb|upright|幾個不同大小的電晶體]]'
