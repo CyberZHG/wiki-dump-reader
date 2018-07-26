@@ -16,6 +16,8 @@ class Cleaner(object):
         text = self._remove_titles(text)
         text = self._remove_choices(text)
         text = self._remove_templates(text)
+        text = self._remove_htmls(text)
+        text = self._remove_lists(text)
         text = self._remove_continuous_newlines(text)
         return text
 
@@ -63,6 +65,7 @@ class Cleaner(object):
         """Remove patterns like <ref*>*</ref>"""
         text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r'{{Refbegin.*?Refend}}', '', text, flags=re.IGNORECASE | re.DOTALL)
         return text
 
     def _remove_emphasises(self, text):
@@ -114,16 +117,24 @@ class Cleaner(object):
                     if depth == 0:
                         link = text[pattern_begin + 2:pattern_end - 2]
                         parts = link.split('|')
-                        template_type = parts[0].split(' ')[0]
+                        template_type = parts[0].split(' ')[0].lower()
                         if len(parts) == 1:
                             if all(map(lambda x: x in {'"', "'", ' '}, parts[0][:])):
                                 removed += parts[0].replace(' ', '')
                         elif len(parts) in [2, 3]:
-                            if template_type not in {'cite', 'webarchive'}:
+                            if template_type in {'le'} or template_type.startswith('link-'):
                                 removed += parts[1]
                         break
             begin = pattern_end
         return removed
+
+    def _remove_htmls(self, text):
+        return re.sub(r'<(.*?)>', '', text, flags=re.DOTALL)
+
+    def _remove_lists(self, text):
+        text = re.sub(r'^\s*\*\s*', '', text, flags=re.MULTILINE)
+        text = re.sub(r'^\s*#\s*', '', text, flags=re.MULTILINE)
+        return text
 
     def _remove_continuous_newlines(self, text):
         return re.sub(r'\n{2,}', '\n', text)
