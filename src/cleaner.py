@@ -19,7 +19,7 @@ class Cleaner(object):
         text = self._remove_htmls(text)
         text = self._remove_lists(text)
         text = self._remove_continuous_newlines(text)
-        return text
+        return text.strip()
 
     def _remove_file_links(self, text):
         """Remove links like `[[File:*]]`"""
