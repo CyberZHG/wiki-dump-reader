@@ -13,6 +13,9 @@ class Cleaner(object):
         text = self._remove_emphasises(text)
         text = self._remove_comments(text)
         text = self._remove_langs(text)
+        text = self._remove_titles(text)
+        text = self._remove_choices(text)
+        text = self._remove_continuous_newlines(text)
         return text
 
     def _remove_file_links(self, text):
@@ -74,6 +77,20 @@ class Cleaner(object):
     def _remove_langs(self, text):
         """Remove pattenrs like {{lang-*|*}}}"""
         return re.sub(r'{{lang(-|\|).*?\|(.*?)}}', r'\2', text, flags=re.IGNORECASE)
+
+    def _remove_titles(self, text):
+        """Remove patterns like ==*=="""
+        return re.sub(r'(={2,6})(.*?)\1', r'\2', text)
+
+    def _remove_choices(self, text):
+        """Remove patterns like -{zh-hans:*; zh-hant:*}-"""
+        text = re.sub(r'-{.*?zh(-hans|-cn|-hk|):(.*?)(;.*?}-|}-)', r'\2', text)
+        text = re.sub(r'-{.*?:(.*?)(;.*?}-|}-)', r'\1', text)
+        text = re.sub(r'-{(.*?)}-', r'\1', text)
+        return text
+
+    def _remove_continuous_newlines(self, text):
+        return re.sub(r'\n{2,}', '\n', text)
 
     def build_links(self, text):
         begin, removed, links = 0, '', []
