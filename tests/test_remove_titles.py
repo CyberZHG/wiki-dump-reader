@@ -9,7 +9,7 @@ class TestRemoveTitles(unittest.TestCase):
 
     def test_remove_titles(self):
         text = "== 研究 =="
-        expected = ' 研究 '
+        expected = '研究'
         actual = self.cleaner._remove_titles(text)
         self.assertEqual(expected, actual)
 

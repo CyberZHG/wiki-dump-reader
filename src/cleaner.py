@@ -9,21 +9,25 @@ class Cleaner(object):
     def clean_text(self, text):
         text = self._remove_file_links(text)
         text = self._remove_image_links(text)
+        text = self._remove_external_links(text)
         text = self._remove_refs(text)
         text = self._remove_emphasises(text)
         text = self._remove_comments(text)
         text = self._remove_langs(text)
-        text = self._remove_titles(text)
+        # text = self._remove_titles(text)
         text = self._remove_choices(text)
         text = self._remove_templates(text)
         text = self._remove_htmls(text)
         text = self._remove_lists(text)
+        text = self._remove_styles(text)
         text = self._remove_continuous_newlines(text)
         return text.strip()
 
     def _remove_file_links(self, text):
         """Remove links like `[[File:*]]`"""
-        return self._remove_resource_links(text, 'File')
+        text = self._remove_resource_links(text, 'File')
+        text = re.sub(r'^File:.*$', '', text, flags=re.MULTILINE)
+        return text
 
     def _remove_image_links(self, text):
         """Remove links like `[[File:*]]`"""
@@ -61,10 +65,14 @@ class Cleaner(object):
             removed += text[begin:]
         return removed
 
+    def _remove_external_links(self, text):
+        """Remove links like [*]"""
+        return re.sub(r'\[h[^ ]+ (.*?)\]', r'\1', text)
+
     def _remove_refs(self, text):
         """Remove patterns like <ref*>*</ref>"""
+        text = re.sub(r'<ref[^/]*?/>', '', text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r'<ref.*?</ref>', '', text, flags=re.IGNORECASE | re.DOTALL)
-        text = re.sub(r'<ref.*?/>', '', text, flags=re.IGNORECASE | re.DOTALL)
         text = re.sub(r'{{Refbegin.*?Refend}}', '', text, flags=re.IGNORECASE | re.DOTALL)
         return text
 
@@ -84,7 +92,7 @@ class Cleaner(object):
 
     def _remove_titles(self, text):
         """Remove patterns like ==*=="""
-        return re.sub(r'(={2,6})(.*?)\1', r'\2', text)
+        return re.sub(r'(={2,6})\s*(.*?)\s*\1', r'\2', text)
 
     def _remove_choices(self, text):
         """Remove patterns like -{zh-hans:*; zh-hant:*}-"""
@@ -132,9 +140,10 @@ class Cleaner(object):
         return re.sub(r'<(.*?)>', '', text, flags=re.DOTALL)
 
     def _remove_lists(self, text):
-        text = re.sub(r'^\s*\*\s*', '', text, flags=re.MULTILINE)
-        text = re.sub(r'^\s*#\s*', '', text, flags=re.MULTILINE)
-        return text
+        return re.sub(r'^\s*[\*#]\s*', '', text, flags=re.MULTILINE)
+
+    def _remove_styles(self, text):
+        return re.sub(r':?{\| style=.*?\|}', '', text, flags=re.IGNORECASE | re.DOTALL)
 
     def _remove_continuous_newlines(self, text):
         return re.sub(r'\n{2,}', '\n', text)

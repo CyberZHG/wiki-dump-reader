@@ -25,13 +25,6 @@ class TestCleanText(unittest.TestCase):
         actual, links = self.cleaner.build_links(actual)
         self.assertEqual(expected, actual)
 
-    def test_case_2(self):
-        text = "====[[Special:内容翻译|内容翻译]]页面===="
-        expected = "内容翻译页面"
-        actual = self.cleaner.clean_text(text)
-        actual, links = self.cleaner.build_links(actual)
-        self.assertEqual(expected, actual)
-
     def test_case_3(self):
         text = "例如，[[全球資訊網]]是在[[歐洲核子研究組織]]由-{A|zh:[[蒂姆·伯纳斯-李]];zh-cn:[[蒂姆·伯纳斯-李]];zh-tw:[[提" \
                "姆·柏納-李]];zh-hk:[[添·柏納-李]];}-創始與發展成功的，原先設計目标為向組織內部和全世界的物理學者提供資訊傳播服務。" \
