@@ -50,3 +50,9 @@ class TestRemoveTemplates(unittest.TestCase):
                    "教哲学]]。"
         actual = self.cleaner._remove_templates(text)
         self.assertEqual(expected, actual)
+
+    def test_remove_quotes(self):
+        text = "He announced, \"The answer was 'Yes!{{' \"}} or {{\" '}}Yes!"
+        expected = "He announced, \"The answer was 'Yes!'\" or \"'Yes!"
+        actual = self.cleaner._remove_templates(text)
+        self.assertEqual(expected, actual)

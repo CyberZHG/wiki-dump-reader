@@ -12,6 +12,7 @@ class TestIterate(unittest.TestCase):
         self.current_path = os.path.dirname(os.path.abspath(__file__))
         self.sample_file_path = os.path.join(
             self.current_path,
+            'wikis',
             'zhwiki-test-pages.xml'
         )
 
@@ -25,6 +26,13 @@ class TestIterate(unittest.TestCase):
         path = os.path.join(self.current_path, 'targets', name + '.tmp')
         with codecs.open(path, 'w', 'utf8') as writer:
             writer.write(text)
+
+    def test_broken(self):
+        broken_files = ['zhwiki-broken-%d.xml' % i for i in range(1, 4)]
+        for broken_file in broken_files:
+            path = os.path.join(self.current_path, 'wikis', broken_file)
+            for _ in iterate(path):
+                self.assertTrue(False)
 
     def test_clean(self):
         targets = {
