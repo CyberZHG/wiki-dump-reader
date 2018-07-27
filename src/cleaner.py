@@ -21,6 +21,7 @@ class Cleaner(object):
         text = self._remove_lists(text)
         text = self._remove_indents(text)
         text = self._remove_styles(text)
+        text = self._remove_spaces(text)
         text = self._remove_continuous_newlines(text)
         return text.strip()
 
@@ -152,6 +153,9 @@ class Cleaner(object):
 
     def _remove_styles(self, text):
         return re.sub(r':?{\| (style|class)=.*?\|}', '', text, flags=re.IGNORECASE | re.DOTALL)
+
+    def _remove_spaces(self, text):
+        return text.replace('\u200b', '')
 
     def _remove_continuous_newlines(self, text):
         return re.sub(r'\n{2,}', '\n', text)
