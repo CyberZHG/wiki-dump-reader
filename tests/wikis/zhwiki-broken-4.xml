@@ -1,0 +1,113 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="zh">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <dbname>zhwiki</dbname>
+    <base>https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5</base>
+    <generator>MediaWiki 1.32.0-wmf.3</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal talk</namespace>
+      <namespace key="118" case="first-letter">Draft</namespace>
+      <namespace key="119" case="first-letter">Draft talk</namespace>
+      <namespace key="828" case="first-letter">模块</namespace>
+      <namespace key="829" case="first-letter">模块讨论</namespace>
+      <namespace key="2300" case="first-letter">Gadget</namespace>
+      <namespace key="2301" case="first-letter">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+      <namespace key="2600" case="first-letter">Topic</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Wikipedia:Upload log</title>
+    <ns>4</ns>
+    <id>1</id>
+    <revision>
+      <id>47828223</id>
+      <parentid>15649431</parentid>
+      <timestamp>2018-01-14T05:10:26Z</timestamp>
+      <contributor>
+        <username>LNDDYL</username>
+        <id>1265487</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">'''这个页面现在已经作废，相关-{zh-tw:資訊;zh-cn:信息;}-请-{zh-tw:參閱;zh-cn:参看;}-[[Special:Log/upload]]。'''
+
+Below is a list of the most recent file uploads.
+All times shown are server time (UTC).
+&lt;ul&gt;&lt;li&gt;2002年12月 11日 09:10 [[User:Formulax|Formulax]] uploaded &quot;[[:File:Shanghai1.jpg|Shanghai1.jpg]]&quot; &lt;em&gt;(上海夜景)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2002年11月 27日 01:12 [[User:Formulax|Formulax]] uploaded &quot;[[:File:Gnu-head-sm.jpeg|Gnu-head-sm.jpeg]]&quot; &lt;em&gt;(GNU project)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2002年11月 22日 07:40 [[User:Formulax|Formulax]] uploaded &quot;[[:File:China_guohui_medium.png|China_guohui_medium.png]]&quot;&lt;/li&gt;
+&lt;li&gt;2002年11月 22日 07:35 [[User:Formulax|Formulax]] uploaded &quot;[[:File:China_guohui.png|China_guohui.png]]&quot; &lt;em&gt;(中华人民共和国国徽)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2002年11月 19日 09:44 [[User:Formulax|Formulax]] uploaded &quot;[[:File:Wiki.png|Wiki.png]]&quot; &lt;em&gt;(Wikipedia logo)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2002年11月 18日 01:58 [[User:Formulax|Formulax]] uploaded &quot;[[:File:China-map.jpg|China-map.jpg]]&quot; &lt;em&gt;(中华人民共和国地图)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;2002年11月 18日 01:57 [[User:Formulax|Formulax]] uploaded &quot;[[:File:China_flag.png|China_flag.png]]&quot; &lt;em&gt;(五星红旗)&lt;/em&gt;&lt;/li&gt;
+
+&lt;/ul&gt;</text>
+      <sha1>faak8gn1buxocah9txrojgtifeicg56</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Wikipedia:删除纪录/档案馆/2004年3月</title>
+    <ns>4</ns>
+    <id>2</id>
+    <restrictions>sysop</restrictions>
+    <revision>
+      <id>1891425</id>
+      <parentid>689184</parentid>
+      <timestamp>2006-05-05T15:42:55Z</timestamp>
+      <contributor>
+        <username>Lorenzarius</username>
+        <id>36</id>
+      </contributor>
+      <minor />
+      <comment>&lt;nowiki&gt;{{ }}&lt;/nowiki&gt;</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">&lt;ul&gt;&lt;li&gt;20:24 2004年3月31日 [[User:Wing|Wing]] 已删除“算死草” &lt;em&gt;(空白之前的内容是： &amp;#39;&amp;amp;lt;math&amp;amp;gt;攻勢&amp;amp;lt;/math&amp;amp;gt;--測&amp;#91;&amp;#91;User:221.169.18.131&amp;#124;221.169.18.131]] 20:11 2004年3月31日 (UTC)----&amp;#91;&amp;#91;Image:Example.jpg]]&amp;#39;)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;12:55 2004年3月31日 [[User:Wing|Wing]] 已删除“塞缪尔·贝克特” &lt;em&gt;(empty)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;12:29 2004年3月31日 [[User:Wing|Wing]] 已删除“圖像:Wiki.png” &lt;em&gt;(内容为： &amp;#39;企业内部的知识共享:---使用php &amp;amp;&amp;amp; mysql &amp;amp;&amp;amp; winNT 来开发;需要更多的知识&amp;#39;)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;12:18 2004年3月31日 [[User:Mountain|Mountain]] 已删除“四大古都” &lt;em&gt;(内容为： &amp;#39;南京\洛阳\西安\开封&amp;#39;)&lt;/em&gt;&lt;/li&gt;
+&lt;!-- 勿刪除以下 &lt;/ul&gt;--&gt;
+&lt;/ul&gt;</text>
+      <sha1>5b533x6go0pblxaxsv12fmb4dth0bve</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>数学</title>
+    <ns>0</ns>
+    <id>13</id>
+    <revision>
+      <id>49603255</id>
+      <parentid>49603204</parentid>
+      <timestamp>2018-05-17T16:33:09Z</timestamp>
+      <contributor>
+        <ip>115.165.231.157</ip>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"/>
+      <sha1>9a36nhm1cvmz7u0vjmzxn6sfjk95w7t</sha1>
+    </revision>
+  </page>
+</mediawiki>

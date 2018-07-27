@@ -27,6 +27,8 @@ def iterate(file_path):
                 if text_elem is None:
                     continue
                 text = text_elem.text
+                if text is None:
+                    continue
                 yield title, text
             else:
                 if type(content) is list:

@@ -28,7 +28,7 @@ class TestIterate(unittest.TestCase):
             writer.write(text)
 
     def test_broken(self):
-        broken_files = ['zhwiki-broken-%d.xml' % i for i in range(1, 4)]
+        broken_files = ['zhwiki-broken-%d.xml' % i for i in range(1, 5)]
         for broken_file in broken_files:
             path = os.path.join(self.current_path, 'wikis', broken_file)
             for _ in iterate(path):
