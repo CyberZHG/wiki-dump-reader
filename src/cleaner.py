@@ -151,7 +151,7 @@ class Cleaner(object):
         return re.sub(r'^\s*[:;]\s*', '', text, flags=re.MULTILINE)
 
     def _remove_styles(self, text):
-        return re.sub(r':?{\| style=.*?\|}', '', text, flags=re.IGNORECASE | re.DOTALL)
+        return re.sub(r':?{\| (style|class)=.*?\|}', '', text, flags=re.IGNORECASE | re.DOTALL)
 
     def _remove_continuous_newlines(self, text):
         return re.sub(r'\n{2,}', '\n', text)
