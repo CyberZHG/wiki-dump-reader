@@ -1,5 +1,5 @@
 import unittest
-from src import Cleaner
+from wiki_dump_reader import Cleaner
 
 
 class TestRemoveChoices(unittest.TestCase):

@@ -1,7 +1,7 @@
 import os
 import codecs
 import unittest
-from src import Cleaner, iterate
+from wiki_dump_reader import Cleaner, iterate
 
 
 class TestIterate(unittest.TestCase):
