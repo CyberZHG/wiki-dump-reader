@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='wiki-dump-reader',
-    version='0.0.1',
+    version='0.0.2',
     packages=['wiki_dump_reader'],
     url='https://github.com/PoWWoP/wiki-dump-reader',
     license='MIT',
