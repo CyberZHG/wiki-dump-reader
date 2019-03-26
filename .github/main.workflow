@@ -8,6 +8,7 @@ action "lint-action" {
   args = "--max-line-length=120 wiki_dump_reader tests"
 }
 
+
 workflow "Unit Test" {
   on = "push"
   resolves = ["test-action"]
